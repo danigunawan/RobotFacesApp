@@ -3,6 +3,7 @@ import CardList from "../components/cardlist";
 import Title from "../components/title";
 import SearchBox from "../components/searchBox";
 import Scroll from "../components/scroll";
+import ErrorBountry from "../components/errorBoundry";
 
 class App extends Component {
   state = {
@@ -21,7 +22,7 @@ class App extends Component {
   };
 
   render() {
-    const {robots, searchfield} = this.state;
+    const { robots, searchfield } = this.state;
     const filteredRobot = robots.filter(r =>
       r.name.toLowerCase().includes(searchfield.toLowerCase())
     );
@@ -34,7 +35,9 @@ class App extends Component {
         <Title />
         <SearchBox onSearchChange={this.handleSearchChange} />
         <Scroll>
-          <CardList robots={filteredRobot} />
+          <ErrorBountry>
+            <CardList robots={filteredRobot} />
+          </ErrorBountry>
         </Scroll>
       </div>
     );
